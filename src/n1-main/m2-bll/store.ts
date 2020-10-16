@@ -1,4 +1,5 @@
-import {combineReducers, createStore, compose} from 'redux';
+import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {loginReducer} from "./loginReducer";
 import {registerReducer} from "./registerReducer";
 import {passwRestoreReducer} from "./passwRestoreReducer";
@@ -15,12 +16,12 @@ const rootReducer = combineReducers({
 
 // const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(rootReducer, compose(
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+export const store = createStore(rootReducer,  compose(
+    applyMiddleware(thunk),
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 ));
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
 // @ts-ignore
 window.store = store;
