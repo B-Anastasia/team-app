@@ -4,7 +4,7 @@ import styles from './Main.module.css';
 const Main = () => {
     return (
         <div>
-           Main
+           Main Kek
         </div>
     );
 }
