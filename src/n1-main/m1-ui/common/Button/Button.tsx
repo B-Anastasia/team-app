@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 });
 
 type ButtonProps = {
+    className?: string;
     fontColor?: "grey";
     backgroundColor?: "blue";
     variant?: "text" | "outlined" | "contained";
@@ -23,15 +24,15 @@ type ButtonProps = {
     disabled?: boolean;
     type?: "submit";
     onClick?: () => void;
+    fullWidth?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
     const classes = useStyles();
-
     return (
         <ButtonBase
             {...props}
-            className={classes.button}
+            className={props.className+" "+ classes.button}
             // className={(props.fontColor ? classes[props.fontColor] : "" )+" "+( props.backgroundColor  === "blue" ? classes[props.backgroundColor] : "")}
         />
     );
