@@ -13,7 +13,7 @@ const App = () => {
                 <div className="App">
                     <Header/>
                     <Grid container justify="space-around">
-                        <Grid item md={10} sm={11}>
+                        <Grid item md={10} sm={11} xs={12}>
                             <Routers/>
                         </Grid>
                     </Grid>
