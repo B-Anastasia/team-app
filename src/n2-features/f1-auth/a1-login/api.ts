@@ -18,11 +18,14 @@ export type LoginParamsType = {
 
 export const authAPI = {
     login(data: LoginParamsType){
-        return instance.post<ResponseLoginType>('auth/login', data)
+        return instance.post<Response>('auth/login', data)
+    },
+    me(){
+        return instance.post<Response>('auth/me')
     }
 }
 
-export type ResponseLoginType = {
+export type Response = {
     _id: string
     email: string
     name: string

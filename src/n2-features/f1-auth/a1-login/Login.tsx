@@ -10,13 +10,14 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../../n1-main/m2-bll/loginReducer";
-import { Redirect } from 'react-router-dom';
-import {selectStateLogin} from "../a4-profile/selectors";
+import {Redirect} from 'react-router-dom';
+import {selectStateLogin} from "./selectors";
+import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
 
 
 type FormikErrorType = {
@@ -24,7 +25,6 @@ type FormikErrorType = {
     password?: string
     rememberMe?: boolean
 }
-
 
 
 function Copyright() {
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login = () => {
-    const {isLoggedIn} = useSelector(selectStateLogin)
+    const {isLoggedIn, isLoading} = useSelector(selectStateLogin)
     const dispatch = useDispatch()
 
     const classes = useStyles();
@@ -91,78 +91,81 @@ export const Login = () => {
         },
     })
 
-    if(isLoggedIn){
-        debugger
-        return <Redirect to={'/profile'}/>
-    }
-
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
+    const isValid = formik.errors.email || formik.errors.password;
+    debugger
+    return (<Container component="main" maxWidth="xs">
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        autoComplete="email"
-                        autoFocus
-                        {...formik.getFieldProps('email')}
-                    />
-                    {formik.errors.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        {...formik.getFieldProps('password')}
-                    />
-                    {formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
-                    <FormControlLabel
-                        label="Remember me"
-                        control={<Checkbox
-                            {...formik.getFieldProps('rememberMe')}
-                        />}
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-                    </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
+                {isLoading && !isLoggedIn
+                    ? <Loader/>
+                    : !isLoggedIn
+                        ? <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            autoComplete="email"
+                            autoFocus
+                            {...formik.getFieldProps('email')}
+                        />
+                        {formik.errors.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            {...formik.getFieldProps('password')}
+                        />
+                        {formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                        <FormControlLabel
+                            label="Remember me"
+                            control={<Checkbox
+                                {...formik.getFieldProps('rememberMe')}
+                            />}
+                        />
+                        <Button
+                            disabled={!!isValid}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign In
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
+                    </form>
+                    : <Redirect to={'/profile'}/>}
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright/>
             </Box>
         </Container>
     );
+
+
 }

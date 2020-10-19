@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from "../main/Main";
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 import Registration from "../../../n2-features/f1-auth/a2-registr/Registration";
 import PasswordRestore from "../../../n2-features/f1-auth/a3-restore/PasswordRestore";
 import PasswordUpdate from "../../../n2-features/f1-auth/a4-update/PasswordUpdate";
@@ -47,6 +47,8 @@ const Routers = () => {
                 exact
                 component={PasswordUpdate}
             />
+            <Route path={'/404'} render={() => <h1>404</h1>}/>
+            <Redirect from={'*'} to={'/404'}/>
         </Switch>
     );
 }
