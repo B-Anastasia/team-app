@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from "../main/Main";
-import {Switch, Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Registration from "../../../n2-features/f1-auth/a2-registr/Registration";
 import PasswordRestore from "../../../n2-features/f1-auth/a3-restore/PasswordRestore";
 import PasswordUpdate from "../../../n2-features/f1-auth/a4-update/PasswordUpdate";
