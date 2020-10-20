@@ -3,14 +3,15 @@ import Container from "@material-ui/core/Container";
 import {Paper} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import {useSelector} from "react-redux";
-import {selectStateLogin} from "../a1-login/selectors";
 import styles from './Profile.module.css';
-import {authAPI} from "../a1-login/api";
 import {Redirect} from 'react-router-dom';
+import {selectStateProfile} from "./selectors";
+import {selectStateLogin} from "../a1-login/selectors";
 
 
 const Profile = () => {
-    const {created, updated, name, isLoggedIn} = useSelector(selectStateLogin)
+    const {isLoggedIn} = useSelector(selectStateLogin)
+    const {created, updated, name, _id} = useSelector(selectStateProfile)
 
 
     if (!isLoggedIn) return <Redirect to={'/login'}/>

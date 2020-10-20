@@ -1,22 +1,23 @@
-import {authAPI} from "../../n2-features/f1-auth/a1-login/api";
-import {Dispatch} from "react";
-import {setIsErrorAC, setIsLoggedInAC} from "../../n2-features/f1-auth/a1-login/actions";
+import {ACTIONS_TYPE, ActionsType} from "../../n2-features/f1-auth/a4-profile/actions";
 
 const initialState = {
-    error: null,
-    isInitialized: false
+    _id: '',
+    email: '',
+    isAdmin: false,
+    rememberMe: null as null | boolean,
+    created: '',
+    updated: '',
+    name: '',
 };
 type InitialStateType = typeof initialState
+
+
+
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+    switch (action.type){
+        case ACTIONS_TYPE.SET_IS_DATA_PROFILE:
+            return {...state, ...action.payload}
+    }
     return state;
 };
 
-export const initializeProfileTC = () => async (dispatch: Dispatch<ActionsType>) => {
-    try {
-        const response = authAPI.me()
-
-    } catch (error) {
-    }
-}
-
-type ActionsType = string;

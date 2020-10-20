@@ -92,7 +92,6 @@ export const Login = () => {
     })
 
     const isValid = formik.errors.email || formik.errors.password;
-    debugger
     return (<Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div className={classes.paper}>

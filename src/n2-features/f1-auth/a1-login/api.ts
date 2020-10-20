@@ -5,7 +5,7 @@ const settings = {
 }
 
 const instance = axios.create({
-    baseURL: 'http://localhost:7542/2.0/',
+    baseURL: 'https://neko-back.herokuapp.com/2.0/',
     ...settings
 })
 
@@ -22,7 +22,16 @@ export const authAPI = {
     },
     me(){
         return instance.post<Response>('auth/me')
-    }
+    },
+    setNewPassword(password: string, resetPasswordToken: string){
+        return instance.post('auth/set-new-password')
+}
+
+}
+
+export type ResponseNewPassword = {
+    info: string
+    error: string
 }
 
 export type Response = {
@@ -31,13 +40,11 @@ export type Response = {
     name: string
     avatar?: string
     publicCardPacksCount: number
-
     created: string
     updated: string
     isAdmin: boolean;
     verified: boolean
     rememberMe: boolean
-
     error: string
 }
 
