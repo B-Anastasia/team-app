@@ -1,4 +1,4 @@
-import {AppRootStateType} from "../../../n1-main/m2-bll/store";
+import {AppRootStateType} from "../store";
 
 
 interface IRootState extends AppRootStateType {}

@@ -1,4 +1,4 @@
-import {ACTIONS_TYPE, ActionsType} from "../../n2-features/f1-auth/a4-profile/actions";
+import {ACTIONS_TYPE, ActionsType} from "./actions";
 
 const initialState = {
     _id: '',

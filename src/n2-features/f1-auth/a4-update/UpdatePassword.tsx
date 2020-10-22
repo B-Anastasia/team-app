@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const PasswordUpdate = () => {
+export const UpdatePassword = () => {
+    const {id} = useParams()
+
+    console.log(id)
 
     const classes = useStyles();
 
@@ -55,6 +58,8 @@ export const PasswordUpdate = () => {
         onSubmit: values => {
         },
     })
+
+
     const isValid = formik.errors.password;
     return (
         <Container component="main" maxWidth="xs">

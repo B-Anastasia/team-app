@@ -3,10 +3,10 @@ import {
     ActionsType, setIsErrorAC,
     setIsLoadingAC,
     setIsLoggedInAC
-} from "../../n2-features/f1-auth/a1-login/actions";
-import {authAPI, LoginParamsType} from "../../n2-features/f1-auth/a1-login/api";
+} from "./actions";
 import {Dispatch} from "react";
-import {setIsDataProfileAC} from "../../n2-features/f1-auth/a4-profile/actions";
+import {setIsDataProfileAC} from "../b2-profileReducer/actions";
+import {authAPI, LoginParamsType} from "../../m3-dal/api";
 
 const initialState = {
     isLoggedIn: false,

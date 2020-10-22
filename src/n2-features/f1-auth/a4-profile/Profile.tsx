@@ -5,8 +5,8 @@ import Avatar from "@material-ui/core/Avatar";
 import {useSelector} from "react-redux";
 import styles from './Profile.module.css';
 import {Redirect} from 'react-router-dom';
-import {selectStateProfile} from "./selectors";
-import {selectStateLogin} from "../a1-login/selectors";
+import {selectStateProfile} from "../../../n1-main/m2-bll/b2-profileReducer/selectors";
+import {selectStateLogin} from "../../../n1-main/m2-bll/b3-loginReducer/selectors";
 
 
 const Profile = () => {

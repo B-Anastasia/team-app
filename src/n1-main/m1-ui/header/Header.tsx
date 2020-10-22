@@ -1,10 +1,10 @@
 import React from 'react';
 import {AppBar, IconButton, Toolbar, Typography, Box, Grid} from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import {Menu} from '@material-ui/icons'
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector} from "react-redux";
-import {selectStateLogin} from "../../../n2-features/f1-auth/a1-login/selectors";
+import {selectStateLogin} from "../../m2-bll/b3-loginReducer/selectors";
 
 const useStyles = makeStyles({
     root: {
@@ -32,46 +32,46 @@ const Header = () => {
                         </IconButton>
                         <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/" className={classes.root}>
+                                <NavLink to="/" className={classes.root}>
                                     Main
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box>
                         <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/login" className={classes.root}>
+                                <NavLink to="/login" className={classes.root}>
                                     Login
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box>
                         <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/registration" className={classes.root}>
+                                <NavLink to="/registration" className={classes.root}>
                                     Registration
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box>
 
 
                         <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/restore" className={classes.root}>
+                                <NavLink to="/restore" className={classes.root}>
                                     Restore password
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box>
                         <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/update" className={classes.root}>
+                                <NavLink to="/update" className={classes.root}>
                                     Update password
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box>
                         {isLoggedIn ? <Box mr={1}>
                             <Typography variant="subtitle1">
-                                <Link to="/profile" className={classes.root}>
+                                <NavLink to="/profile" className={classes.root}>
                                     Profile
-                                </Link>
+                                </NavLink>
                             </Typography>
                         </Box> : null}
                     </Toolbar>

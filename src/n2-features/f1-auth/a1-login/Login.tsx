@@ -14,9 +14,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../../n1-main/m2-bll/loginReducer";
+import {loginTC} from "../../../n1-main/m2-bll/b3-loginReducer/loginReducer";
 import {Redirect} from 'react-router-dom';
-import {selectStateLogin} from "./selectors";
+import {selectStateLogin} from "../../../n1-main/m2-bll/b3-loginReducer/selectors";
 import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
 
 
