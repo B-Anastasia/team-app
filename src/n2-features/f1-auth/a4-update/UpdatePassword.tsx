@@ -48,7 +48,7 @@ export const UpdatePassword = () => {
     const formik = useFormik({
         initialValues: {
             password: '',
-            token: id
+            resetPasswordToken: id
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -60,6 +60,8 @@ export const UpdatePassword = () => {
             return errors;
         },
         onSubmit: values => {
+            debugger
+            dispatch(setNewPasswordTC(values))
         },
     })
 

@@ -3,26 +3,27 @@ import {Dispatch} from "redux";
 import {ActionTypes} from "../store";
 import {setError, setIsLoading} from "../b1-app/appReducer";
 
-const initialState = {
-    info: ''
-};
+const initialState = {};
 
 type initialStateType = typeof initialState
 
-export const passwUpdateReducer = (state: initialStateType = initialState, action:ActionTypes) => {
+export const passwUpdateReducer = (state: initialStateType = initialState, action: ActionTypes):initialStateType => {
+    switch (action.type) {
+        default:
+            return state
+    }
 
-    return state;
 };
 
 export const setNewPasswordTC = (data: setNewPasswordParamsType) => async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(setIsLoading(true));
     try {
         const response = await authAPI.setNewPassword(data)
-
     } catch (error) {
         console.dir(error);
         dispatch(setError(error.response.data.error));
         dispatch(setIsLoading(false));
+        console.log(error.response.data.error)
 
     }
 }

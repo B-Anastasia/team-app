@@ -64,11 +64,13 @@ const Registration = () => {
             dispatch(registerUser(values))
         }
     })
+
     if (userError) formik.errors.email = userError;
     useEffect(() => {
         if (userError) dispatch(setError(null));
     }, [dispatch, formik.values, userError]);
     const isValid = formik.errors.email || formik.errors.password;
+
     return (
         <Container maxWidth="xs" className={classes.container}>
             <Box height="100%" display="flex" mt={8} flexDirection="column" alignItems="center">
