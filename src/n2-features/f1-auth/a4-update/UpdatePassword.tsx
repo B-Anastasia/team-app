@@ -8,10 +8,13 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useFormik} from "formik";
 import { useParams } from 'react-router-dom';
+import {useDispatch} from "react-redux";
+import {setNewPasswordTC} from "../../../n1-main/m2-bll/b4-passwUpdatereducer/passwUpdateReducer";
 
 type FormikErrorType = {
     password?: string
 }
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const UpdatePassword = () => {
+    const dispatch = useDispatch();
     const {id} = useParams()
 
-    console.log(id)
 
     const classes = useStyles();
 
@@ -45,6 +48,7 @@ export const UpdatePassword = () => {
     const formik = useFormik({
         initialValues: {
             password: '',
+            token: id
         },
         validate: (values) => {
             const errors: FormikErrorType = {};

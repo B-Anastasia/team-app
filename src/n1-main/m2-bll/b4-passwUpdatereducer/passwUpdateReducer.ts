@@ -1,9 +1,28 @@
+import {authAPI, setNewPasswordParamsType} from "../../m3-dal/api";
+import {Dispatch} from "redux";
+import {ActionTypes} from "../store";
+import {setError, setIsLoading} from "../b1-app/appReducer";
+
 const initialState = {
-    update: []
+    info: ''
 };
 
-export const passwUpdateReducer = (state = initialState, action: ActionsType)=>{
+type initialStateType = typeof initialState
+
+export const passwUpdateReducer = (state: initialStateType = initialState, action:ActionTypes) => {
+
     return state;
 };
 
-type ActionsType = string;
+export const setNewPasswordTC = (data: setNewPasswordParamsType) => async (dispatch: Dispatch<ActionTypes>) => {
+    dispatch(setIsLoading(true));
+    try {
+        const response = await authAPI.setNewPassword(data)
+
+    } catch (error) {
+        console.dir(error);
+        dispatch(setError(error.response.data.error));
+        dispatch(setIsLoading(false));
+
+    }
+}

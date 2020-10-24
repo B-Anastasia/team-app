@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
@@ -13,7 +12,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useParams} from 'react-router-dom';
 import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
 import {selectStateLogin} from "../../../n1-main/m2-bll/b3-loginReducer/selectors";
-import {forgotPasswordTc} from "../../../n1-main/m2-bll/b3-passwRestoreReducer/passwRestoreReducer";
+import {forgotPasswordTC} from "../../../n1-main/m2-bll/b3-passwRestoreReducer/passwRestoreReducer";
+import {selectStateApp} from "../../../n1-main/m2-bll/b1-app/selectors";
 
 
 type FormikErrorType = {
@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const RestorePassword = () => {
-    const {isLoggedIn, isLoading} = useSelector(selectStateLogin)
+    const {isLoggedIn} = useSelector(selectStateLogin)
+    const {isLoading} = useSelector(selectStateApp)
     const dispatch = useDispatch()
 
 
@@ -65,7 +66,7 @@ export const RestorePassword = () => {
             return errors;
         },
         onSubmit: values => {
-            dispatch(forgotPasswordTc(values))
+            dispatch(forgotPasswordTC(values))
         },
     })
 

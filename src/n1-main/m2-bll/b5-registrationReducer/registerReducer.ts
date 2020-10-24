@@ -1,9 +1,8 @@
 import {Dispatch} from "redux";
 import {authAPI, RegisterParams} from "../../m3-dal/api";
-import {ACTIONS_TYPE, ActionsType, setError, setIsLoading, setIsRegistered, setNewUserData} from "./actions";
+import {ActionTypes} from "../store";
+import {setError, setIsLoading} from "../b1-app/appReducer";
 
-
-type InitialState = typeof initialState;
 
 const initialState = {
     email: null as null | string,
@@ -13,35 +12,40 @@ const initialState = {
     error: null as null | string,
 };
 
-export const registerReducer = (state: InitialState = initialState, action: ActionsType): InitialState => {
+type InitialState = typeof initialState;
+
+
+export const registerReducer = (state: InitialState = initialState, action: ActionTypes): InitialState => {
     switch (action.type) {
-        case ACTIONS_TYPE.CREATE_USER:
+        case "CREATE_USER":
             return {
                 ...state,
-                ...action.payload
+                ...action.data
             }
-        case ACTIONS_TYPE.SET_IS_LOADING:
+
+        case "SET_IS_REGISTERED":
             return {
                 ...state,
-                isLoading: action.payload
+                isRegistered: action.isRegistered
             }
-        case ACTIONS_TYPE.SET_IS_REGISTERED:
-            return {
-                ...state,
-                isRegistered: action.payload
-            }
-        case ACTIONS_TYPE.SET_ERROR:
-            return {
-                ...state,
-                error: action.payload
-            }
+
         default:
             return state;
     }
 };
 
+export type NewUserData = {
+    email: null | string,
+    password: null | string,
+}
+
+
+export const setNewUserData = (data: NewUserData) => ({type: 'CREATE_USER', data} as const)
+export const setIsRegistered = (isRegistered: boolean) => ({type: 'SET_IS_REGISTERED', isRegistered} as const)
+
+
 //thunks
-export const registerUser = (params: RegisterParams) => async (dispatch: Dispatch<ActionsType>) => {
+export const registerUser = (params: RegisterParams) => async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(setIsLoading(true));
     dispatch(setError(null));
     try {
@@ -56,3 +60,6 @@ export const registerUser = (params: RegisterParams) => async (dispatch: Dispatc
         dispatch(setIsRegistered(false));
     }
 }
+
+
+

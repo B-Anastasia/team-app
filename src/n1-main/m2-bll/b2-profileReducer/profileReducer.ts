@@ -1,4 +1,14 @@
-import {ACTIONS_TYPE, ActionsType} from "./actions";
+import {ActionTypes} from "../store";
+
+export type setIsDataProfilePayload = {
+    name: string
+    email: string
+    created: string
+    updated: string
+    avatar?: string
+    _id: string
+    rememberMe: boolean
+}
 
 const initialState = {
     _id: '',
@@ -13,11 +23,14 @@ type InitialStateType = typeof initialState
 
 
 
-export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type){
-        case ACTIONS_TYPE.SET_IS_DATA_PROFILE:
-            return {...state, ...action.payload}
+        case "SET_IS_DATA_PROFILE":
+            return {...state, ...action.data}
     }
     return state;
 };
+
+
+export const setIsDataProfileAC = (data: setIsDataProfilePayload) => ({type:"SET_IS_DATA_PROFILE", data} as const)
 
